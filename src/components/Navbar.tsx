@@ -18,7 +18,6 @@ export default function Navbar({ onStartTrial }: NavbarProps) {
     { name: 'Capabilities', href: '#capabilities' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'Pricing', href: '#pricing' },
-    { name: 'Guild', href: '#guild' },
     { name: 'Contact', href: '#contact' },
   ];
 
