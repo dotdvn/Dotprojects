@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-gold-base: #a78b71;
+  --color-gold-light: #c9b8a0;
+  --color-gold-hover: #e8d5b7;
+  --color-dark-bg: #0a0a0a;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  
+  --animate-pulse-slow: pulse-slow 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  --animate-branch: pulsing-branch 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  --animate-dash: dash-flow 30s linear infinite;
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.2; transform: scale(0.98); }
+    50% { opacity: 0.5; transform: scale(1.02); }
+  }
+  @keyframes pulsing-branch {
+    0%, 100% { opacity: 0.35; stroke-width: 2.2; }
+    50% { opacity: 0.75; stroke-width: 3.2; }
+  }
+  @keyframes dash-flow {
+    to {
+      stroke-dashoffset: -40;
+    }
+  }
+}
+
+/* Custom Base Grid Background */
+.bg-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Glassmorphic Layer styling */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(167, 139, 113, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 30px rgba(167, 139, 113, 0.08);
+}
+
+.gold-text {
+  color: #a78b71;
+}
+
+.gold-bg {
+  background-color: #a78b71;
+}
+
+/* Central ambient glow background */
+.central-glow {
+  box-shadow: 0 0 100px rgba(167, 139, 113, 0.15);
+}
+
+.ambient-glow {
+  box-shadow: 0 0 100px rgba(167, 139, 113, 0.15);
+}
+
+.playfair {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+}
+
+/* Node line style */
+.node-line {
+  animation: pulsing-branch 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Scrollbar tweaks */
+html, body {
+  background-color: #0a0a0a !important;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(167, 139, 113, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(167, 139, 113, 0.6);
+}
