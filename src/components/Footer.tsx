@@ -16,7 +16,9 @@ import {
   HelpCircle,
   Twitter,
   Github,
-  GitBranch
+  GitBranch,
+  Instagram,
+  MessageCircle
 } from 'lucide-react';
 
 export default function Footer() {
@@ -102,35 +104,37 @@ export default function Footer() {
                   </div>
                 </a>
 
-                {/* Phone Call */}
+                {/* WhatsApp */}
                 <a 
-                  href="tel:8921546426" 
+                  href="https://wa.me/918921546426" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-4 group p-3.5 rounded-xl border border-white/5 bg-black/25 hover:border-gold-base/30 hover:bg-gold-base/5 transition-all duration-300"
-                  id="contact_phone_link"
+                  id="contact_whatsapp_link"
                 >
                   <div className="w-10 h-10 rounded-lg bg-gold-base/10 flex items-center justify-center border border-gold-base/20 group-hover:bg-gold-base/20 transition-all">
-                    <Phone className="w-4 h-4 text-gold-light" />
+                    <MessageCircle className="w-4 h-4 text-gold-light" />
                   </div>
                   <div>
-                    <span className="font-mono text-[9px] text-gray-500 uppercase block">DIRECT HOTLINE</span>
-                    <span className="font-sans text-sm font-bold text-white tracking-wide">8921546426</span>
+                    <span className="font-mono text-[9px] text-gray-500 uppercase block">WHATSAPP DIRECT</span>
+                    <span className="font-sans text-sm font-bold text-white tracking-wide">+91 8921546426</span>
                   </div>
                 </a>
 
-                {/* Public Domain */}
+                {/* Instagram */}
                 <a 
-                  href="https://dotprojects.dotdvn.me" 
+                  href="https://instagram.com/dotprojects.msi" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 group p-3.5 rounded-xl border border-white/5 bg-black/25 hover:border-gold-base/30 hover:bg-gold-base/5 transition-all duration-300"
-                  id="contact_website_link"
+                  id="contact_instagram_link"
                 >
                   <div className="w-10 h-10 rounded-lg bg-gold-base/10 flex items-center justify-center border border-gold-base/20 group-hover:bg-gold-base/20 transition-all">
-                    <Globe className="w-4 h-4 text-gold-light" />
+                    <Instagram className="w-4 h-4 text-gold-light" />
                   </div>
                   <div>
-                    <span className="font-mono text-[9px] text-gray-500 uppercase block">STABLE WEBSITE</span>
-                    <span className="font-sans text-sm font-bold text-white tracking-wide">dotprojects.dotdvn.me</span>
+                    <span className="font-mono text-[9px] text-gray-500 uppercase block">INSTAGRAM SOCIAL</span>
+                    <span className="font-sans text-sm font-bold text-white tracking-wide">@dotprojects.msi</span>
                   </div>
                 </a>
               </div>
