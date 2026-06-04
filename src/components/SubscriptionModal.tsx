@@ -17,6 +17,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
   const [profile, setProfile] = useState({
     name: '',
     email: '',
+    phone: '',
     discipline: 'Premium Web Platforms',
   });
   const [isSuccess, setIsSuccess] = useState(false);
@@ -51,6 +52,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
           _subject: `New Plan Selection from ${profile.name}`,
           Name: profile.name,
           Email: profile.email,
+          Phone: profile.phone,
           Discipline: profile.discipline,
           SelectedPlan: selectedPlan || 'Website Plan',
           ProposalCode: code
@@ -156,6 +158,22 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
                       />
                     </div>
 
+                    {/* Phone Input */}
+                    <div>
+                      <label className="font-sans text-[10px] font-semibold text-gray-400 tracking-wider uppercase block mb-1.5">
+                        Mobile Number
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={profile.phone}
+                        onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                        placeholder="E.g. +91 8921546426"
+                        className="w-full px-4 py-3 rounded-lg bg-white/[0.02] border border-white/10 text-white font-sans text-xs focus:border-gold-base focus:outline-none focus:bg-white/[0.04] transition-all"
+                        id="input_modal_phone"
+                      />
+                    </div>
+
                     {/* Discipline Selection */}
                     <div>
                       <label className="font-sans text-[10px] font-semibold text-gray-400 tracking-wider uppercase block mb-1.5">
@@ -192,7 +210,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
                         ) : (
                           <>
                             <Shield className="w-3.5 h-3.5" />
-                            <span>Transmit Proposal Blueprint</span>
+                            <span>Submit</span>
                           </>
                         )}
                       </button>
