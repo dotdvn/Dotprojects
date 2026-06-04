@@ -102,7 +102,7 @@ export interface DotProjectsPriceTier {
 export const PRICING_PLANS_DOT: DotProjectsPriceTier[] = [
   {
     id: 'plan-starter',
-    name: 'Starter Plan',
+    name: 'Custom IoT Code Plan',
     priceLabel: '₹399+',
     priceType: '₹',
     description: 'Perfect for students and minimal prototype needs requiring custom sensor routines and electronic calibration.',
@@ -115,7 +115,7 @@ export const PRICING_PLANS_DOT: DotProjectsPriceTier[] = [
   },
   {
     id: 'plan-prof',
-    name: 'Professional Plan',
+    name: 'Website Plan',
     priceLabel: 'Starting ₹1299',
     priceType: 'Starts',
     description: 'Our most sought-after Tier for businesses seeking a pristine, modern web representation with exceptional design.',
@@ -131,7 +131,7 @@ export const PRICING_PLANS_DOT: DotProjectsPriceTier[] = [
   },
   {
     id: 'plan-advanced',
-    name: 'Advanced Plan',
+    name: 'App Plan',
     priceLabel: 'Starting ₹1699',
     priceType: 'Starts',
     description: 'Engineered for robust startups demanding high-performance Android & iOS companion applications.',

@@ -664,7 +664,7 @@ export default function HeroNodeGraph({ onStartTrial, onSynthesize }: HeroNodeGr
                     <Flame className="w-3 h-3 text-gold-base" /> DELIVERY EXPEDITE
                   </span>
                   <span className="text-white font-bold">
-                    {deliverySpeed >= 1.8 ? 'Express Delivery (24h)' : 'Regular (2-3 Days)'}
+                    {deliverySpeed >= 1.8 ? 'Express Delivery (24h)' : 'Regular (3-5 Days)'}
                   </span>
                 </div>
                 <input
@@ -816,7 +816,7 @@ export default function HeroNodeGraph({ onStartTrial, onSynthesize }: HeroNodeGr
               <div className="flex justify-between font-mono text-[10px] text-gray-400 mb-1">
                 <span>DELIVERY EXPEDITE</span>
                 <span className="text-white font-bold">
-                  {deliverySpeed >= 1.8 ? 'Express (24h)' : 'Regular (2-3 Days)'}
+                  {deliverySpeed >= 1.8 ? 'Express (24h)' : 'Regular (3-5 Days)'}
                 </span>
               </div>
               <div className="py-2">

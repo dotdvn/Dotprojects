@@ -19,7 +19,7 @@ import ProjectsGallery from './components/ProjectsGallery';
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState('Professional Plan');
+  const [selectedPlan, setSelectedPlan] = useState('Website Plan');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Global mouse tracking states for the interactive glowing orb following the cursor on the full website
@@ -54,7 +54,7 @@ export default function App() {
   }, []);
 
   const triggerStartInquiry = () => {
-    setSelectedPlan('Professional Plan');
+    setSelectedPlan('Website Plan');
     setModalOpen(true);
   };
 

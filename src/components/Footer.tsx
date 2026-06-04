@@ -195,9 +195,9 @@ export default function Footer() {
                   disabled={isSubmitted}
                   className="w-full bg-black/40 border border-white/10 rounded-md py-3 px-4 font-sans text-xs text-white focus:outline-none focus:border-gold-base transition-colors appearance-none cursor-pointer"
                 >
-                  <option value="plan-starter">Starter Plan (IoT Code Making - ₹399+)</option>
-                  <option value="plan-prof">Professional Plan (Premium Website - ₹599+)</option>
-                  <option value="plan-advanced">Advanced Plan (App Development - ₹699+)</option>
+                  <option value="plan-starter">Custom IoT Code Plan (IoT Code Making - Starting ₹399)</option>
+                  <option value="plan-prof">Website Plan (Premium Website - Starting ₹1299)</option>
+                  <option value="plan-advanced">App Plan (App Development - Starting ₹1699)</option>
                   <option value="plan-pcb">Custom PCB Plan (PCB Designing - Starts ₹499)</option>
                 </select>
               </div>

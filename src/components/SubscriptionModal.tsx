@@ -95,7 +95,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
                     Enter Project Sanctuary
                   </h3>
                   <p className="font-sans text-xs text-gray-400 leading-relaxed tracking-wide mb-6">
-                    Initialize your custom technical requirements. You are configuring an inquiry draft under the <span className="text-gold-light font-bold">"{selectedPlan || 'Professional'}"</span> channel.
+                    Initialize your custom technical requirements. You are configuring an inquiry draft under the <span className="text-gold-light font-bold">"{selectedPlan || 'Website Plan'}"</span> channel.
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -188,7 +188,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
                   </span>
 
                   <p className="font-sans text-xs text-gray-400 leading-relaxed tracking-wide mt-6 mb-8 max-w-sm mx-auto">
-                    Welcome to DOT PROJECTS, <span className="text-white font-bold">{profile.name}</span>.<br /> Your draft environment has been locked in representing the <span className="text-white">{profile.discipline}</span> queue under the <span className="text-gold-light font-medium">{selectedPlan || 'Professional'} Tier</span>.
+                    Welcome to DOT PROJECTS, <span className="text-white font-bold">{profile.name}</span>.<br /> Your draft environment has been locked in representing the <span className="text-white">{profile.discipline}</span> queue under the <span className="text-gold-light font-medium">{selectedPlan || 'Website Plan'} Tier</span>.
                   </p>
 
                   {/* Proposal Token */}
