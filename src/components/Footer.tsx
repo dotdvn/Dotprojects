@@ -185,7 +185,7 @@ export default function Footer() {
                   <label className="font-mono text-[8.5px] text-gray-500 uppercase block mb-2 font-bold tracking-wider">EMAIL ADDRESS</label>
                   <input
                     type="email"
-                    placeholder="E.g. dotdvn@domain.com"
+                    placeholder="E.g. dotdvn16@gmail.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required

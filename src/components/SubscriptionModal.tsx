@@ -20,6 +20,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
     discipline: 'Premium Web Platforms',
   });
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [proposalId, setProposalId] = useState('');
 
   const specialties = [
@@ -29,14 +30,38 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
     'IoT Microcontroller Coding',
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!profile.name || !profile.email) return;
+    
+    setIsSubmitting(true);
 
     // Generate a beautiful premium dispatch inquiry reference code
     const cleanEmail = profile.email.replace(/[^a-zA-Z0-9]/g, '').toUpperCase().slice(0, 4);
     const code = `DOT-${cleanEmail}-${Math.floor(1000 + Math.random() * 9000)}-PRJ`;
+    
+    try {
+      await fetch('https://formsubmit.co/ajax/dotdvn16@gmail.com', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `New Plan Selection from ${profile.name}`,
+          Name: profile.name,
+          Email: profile.email,
+          Discipline: profile.discipline,
+          SelectedPlan: selectedPlan || 'Website Plan',
+          ProposalCode: code
+        })
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+    
     setProposalId(code);
+    setIsSubmitting(false);
     setIsSuccess(true);
   };
 
@@ -109,7 +134,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
                         required
                         value={profile.name}
                         onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                        placeholder="E.g. Jayanth Sharma"
+                        placeholder="E.g. Devan"
                         className="w-full px-4 py-3 rounded-lg bg-white/[0.02] border border-white/10 text-white font-sans text-xs focus:border-gold-base focus:outline-none focus:bg-white/[0.04] transition-all"
                         id="input_modal_name"
                       />
@@ -125,7 +150,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
                         required
                         value={profile.email}
                         onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                        placeholder="E.g. jayanth@domain.com"
+                        placeholder="E.g. dotdvn16@gmail.com"
                         className="w-full px-4 py-3 rounded-lg bg-white/[0.02] border border-white/10 text-white font-sans text-xs focus:border-gold-base focus:outline-none focus:bg-white/[0.04] transition-all"
                         id="input_modal_email"
                       />
@@ -158,11 +183,18 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlan }: Sub
                     <div className="pt-4">
                       <button
                         type="submit"
-                        className="w-full py-3.5 bg-gradient-to-r from-gold-base to-gold-light hover:brightness-110 active:scale-[0.98] transition-all duration-300 text-black font-sans text-[11px] font-bold uppercase tracking-widest rounded-md flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+                        disabled={isSubmitting}
+                        className="w-full py-3.5 bg-gradient-to-r from-gold-base to-gold-light hover:brightness-110 active:scale-[0.98] transition-all duration-300 text-black font-sans text-[11px] font-bold uppercase tracking-widest rounded-md flex items-center justify-center gap-2 shadow-lg cursor-pointer disabled:opacity-75 disabled:cursor-wait"
                         id="btn_submit_modal_form"
                       >
-                        <Shield className="w-3.5 h-3.5" />
-                        <span>Transmit Proposal Blueprint</span>
+                        {isSubmitting ? (
+                          <span>Transmitting...</span>
+                        ) : (
+                          <>
+                            <Shield className="w-3.5 h-3.5" />
+                            <span>Transmit Proposal Blueprint</span>
+                          </>
+                        )}
                       </button>
                     </div>
                   </form>
