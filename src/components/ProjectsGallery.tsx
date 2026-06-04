@@ -63,8 +63,8 @@ const GALLERY_PROJECTS: Project[] = [
     category: 'pcb',
     categoryLabel: 'PCB Design',
     tag: 'GRBL Shield',
-    description: 'Compact 4-axis stepper motor control board engineered for precision desktop CNC mills and laser engravers with opto-isolated limit switches.',
-    longDescription: 'A fully integrated GRBL 1.1 compatible shield designed to eliminate wiring clutter. Features robust power decoupling, dedicated spindle/laser PWM channels, and interference-resistant limit switch inputs to ensure reliable, micron-level machining.',
+    description: 'Compact 4-axis stepper motor control circuit and 3D files engineered for precision .',
+    longDescription: 'A fully integrated GRBL compatible shield designed to eliminate wiring clutter. Features robust power decoupling, dedicated spindle/laser PWM channels, and interference-resistant limit switch inputs to ensure reliable, micron-level machining.',
     imageUrl: '/cnc.jpeg',
     budgetEst: '₹1299+',
     metric: '4-Axis Control',
@@ -88,12 +88,32 @@ const GALLERY_PROJECTS: Project[] = [
     budgetEst: 'Custom',
     metric: 'Personal Brand',
     specs: [
-      { label: 'Deployment', value: 'Vercel / Netlify' },
+      { label: 'Deployment', value: 'Vercel' },
       { label: 'Design System', value: 'Custom UI/UX' },
       { label: 'Responsiveness', value: 'Mobile-first Grid' },
       { label: 'Animations', value: 'Framer Motion' }
     ],
+
     stack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite']
+  },
+  {
+    id: 'proj-custom-pcb',
+    title: 'Advanced Custom PCB',
+    category: 'pcb',
+    categoryLabel: 'PCB Design',
+    tag: 'Custom Board',
+    description: 'High-performance printed circuit board designed for rapid prototyping and robust industrial applications.',
+    longDescription: 'A multi-layer custom PCB engineered for high signal integrity, featuring advanced ground planes and efficient power routing. Perfect for embedded systems and complex microcontroller configurations.',
+    imageUrl: '/pcb.png',
+    budgetEst: '₹499+',
+    metric: 'Custom Layers',
+    specs: [
+      { label: 'Layer Count', value: '2-6 Layer Options' },
+      { label: 'Routing', value: 'Impedance Controlled' },
+      { label: 'Power', value: 'High Efficiency Planes' },
+      { label: 'Design Tool', value: 'KiCad/Altium' }
+    ],
+    stack: ['KiCad', 'SMD', 'Prototyping', 'Circuit Design']
   }
 ];
 
