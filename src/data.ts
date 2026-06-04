@@ -116,8 +116,8 @@ export const PRICING_PLANS_DOT: DotProjectsPriceTier[] = [
   {
     id: 'plan-prof',
     name: 'Professional Plan',
-    priceLabel: '₹1299+',
-    priceType: '₹',
+    priceLabel: 'Starting ₹1299',
+    priceType: 'Starts',
     description: 'Our most sought-after Tier for businesses seeking a pristine, modern web representation with exceptional design.',
     features: [
       'Premium Website Development',
@@ -132,8 +132,8 @@ export const PRICING_PLANS_DOT: DotProjectsPriceTier[] = [
   {
     id: 'plan-advanced',
     name: 'Advanced Plan',
-    priceLabel: '₹1699+',
-    priceType: '₹',
+    priceLabel: 'Starting ₹1699',
+    priceType: 'Starts',
     description: 'Engineered for robust startups demanding high-performance Android & iOS companion applications.',
     features: [
       'Native-feel App Development',

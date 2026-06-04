@@ -231,7 +231,7 @@ export default function HeroNodeGraph({ onStartTrial, onSynthesize }: HeroNodeGr
   };
 
   // Custom project configuration parameters for the slider
-  const [complexity, setComplexity] = useState(50); // 10% to 100%
+
   const [scopeType, setScopeType] = useState<'iot' | 'web' | 'app' | 'pcb'>('web');
   const [deliverySpeed, setDeliverySpeed] = useState(1.5); // 1.0 = standard, 2.0 = fast express
 
@@ -268,17 +268,16 @@ export default function HeroNodeGraph({ onStartTrial, onSynthesize }: HeroNodeGr
     if (scopeType === 'iot') {
       basePrice = 399; // Starter Plan base
     } else if (scopeType === 'web') {
-      basePrice = 599; // Professional base
+      basePrice = 1299; // Professional base
     } else if (scopeType === 'app') {
-      basePrice = 699; // Advanced base
+      basePrice = 1699; // Advanced base
     } else if (scopeType === 'pcb') {
       basePrice = 499; // PCB base
     }
 
-    const scalingFactor = 1 + (complexity - 50) / 100; // factor from 0.6 to 1.5
     const deliveryMultiplier = deliverySpeed >= 1.8 ? 1.2 : 1.0;
     
-    const estimate = Math.floor(basePrice * scalingFactor * deliveryMultiplier);
+    const estimate = Math.floor(basePrice * deliveryMultiplier);
     return `₹${estimate}+`;
   };
 
@@ -658,24 +657,6 @@ export default function HeroNodeGraph({ onStartTrial, onSynthesize }: HeroNodeGr
 
             {/* Dynamic Output Parameters */}
             <div className="space-y-4 flex-1 relative z-10 mb-3">
-              {/* Slider 1: Project complexity state */}
-              <div>
-                <div className="flex justify-between font-mono text-[9.5px] text-gray-400 mb-1">
-                  <span className="flex items-center gap-1">
-                    <SlidersHorizontal className="w-3 h-3 text-gold-base" /> COMPLEXITY SCALE
-                  </span>
-                  <span className="text-white font-bold">{complexity}%</span>
-                </div>
-                <input
-                  type="range"
-                  min="20"
-                  max="100"
-                  value={complexity}
-                  onChange={(e) => setComplexity(parseInt(e.target.value))}
-                  className="w-full accent-gold-base bg-white/5 rounded-lg h-1 appearance-none cursor-ew-resize"
-                />
-              </div>
-
               {/* Slider 2: Delivery window multiplier */}
               <div>
                 <div className="flex justify-between font-mono text-[9.5px] text-gray-400 mb-1">
@@ -831,23 +812,6 @@ export default function HeroNodeGraph({ onStartTrial, onSynthesize }: HeroNodeGr
 
           {/* Slider details */}
           <div className="space-y-4 mb-5">
-            <div>
-              <div className="flex justify-between font-mono text-[10px] text-gray-400 mb-1">
-                <span>COMPLEXITY RATIO</span>
-                <span className="text-white font-bold">{complexity}%</span>
-              </div>
-              <div className="py-2">
-                <input
-                  type="range"
-                  min="20"
-                  max="100"
-                  value={complexity}
-                  onChange={(e) => setComplexity(parseInt(e.target.value))}
-                  className="w-full accent-gold-base bg-white/5 rounded-lg h-1.5 cursor-pointer"
-                />
-              </div>
-            </div>
-
             <div>
               <div className="flex justify-between font-mono text-[10px] text-gray-400 mb-1">
                 <span>DELIVERY EXPEDITE</span>
