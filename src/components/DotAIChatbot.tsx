@@ -33,28 +33,9 @@ export default function DotAIChatbot() {
     }
   }, [messages, isTyping]);
 
-  const generateResponse = (input: string) => {
-    const lowerInput = input.toLowerCase();
-    
-    if (lowerInput.includes('price') || lowerInput.includes('cost') || lowerInput.includes('budget') || lowerInput.includes('fee')) {
-      return "Our Custom IoT Code Plan starts at ₹399, the Website Plan starts at ₹1299, and the App Plan starts at ₹1699. Custom PCBs start at ₹499. You can select a plan and transmit a proposal blueprint from our main page.";
-    }
-    if (lowerInput.includes('iot') || lowerInput.includes('hardware') || lowerInput.includes('pcb') || lowerInput.includes('sensor')) {
-      return "We specialize in ESP32/ESP8266 development, Custom PCB routing (KiCad), and complex sensor integrations. Let us build your next smart hardware node.";
-    }
-    if (lowerInput.includes('web') || lowerInput.includes('app') || lowerInput.includes('site') || lowerInput.includes('mobile')) {
-      return "We build premium, highly-responsive web platforms and mobile applications using React, Vite, and Framer Motion to ensure exceptional aesthetic quality and performance.";
-    }
-    if (lowerInput.includes('contact') || lowerInput.includes('phone') || lowerInput.includes('email') || lowerInput.includes('whatsapp')) {
-      return "You can reach Devaan directly via WhatsApp at +91 8921546426, or email support@dotdvn.me.";
-    }
-    
-    return "I am processing your request. For complex engineering inquiries, I recommend using the 'Submit Dispatch Inquiry' form at the bottom of the page to contact Devaan directly.";
-  };
-
-  const handleSend = (e?: React.FormEvent) => {
+  const handleSend = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || isTyping) return;
 
     const userMsg: Message = {
       id: Date.now().toString(),
@@ -63,20 +44,46 @@ export default function DotAIChatbot() {
     };
 
     setMessages((prev) => [...prev, userMsg]);
+    const currentInput = inputValue.trim();
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate AI processing delay
-    setTimeout(() => {
-      const aiResponse = generateResponse(userMsg.text);
+    try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      if (!apiKey) {
+        throw new Error("API key not found.");
+      }
+
+      const promptContext = `You are Dot AI, the professional, futuristic automated assistant for Dotprojects, an engineering and digital agency founded by Devaan. You specialize in IoT, Web Apps, and Custom PCBs. Keep responses extremely concise (1-3 sentences maximum). Dotprojects services: Website Plan (starts ₹1299), App Plan (starts ₹1699), Custom IoT Code (starts ₹399), Custom PCB Design (starts ₹499). Contact: WhatsApp +91 8921546426 or email support@dotdvn.me. Respond to this user query: "${currentInput}"`;
+
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: promptContext }] }]
+        })
+      });
+
+      const data = await response.json();
+      const aiText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I apologize, my neural networks are currently experiencing latency. Please try again.";
+
       const aiMsg: Message = {
         id: (Date.now() + 1).toString(),
         sender: 'ai',
-        text: aiResponse,
+        text: aiText,
       };
       setMessages((prev) => [...prev, aiMsg]);
+    } catch (error) {
+      console.error(error);
+      const aiMsg: Message = {
+        id: (Date.now() + 1).toString(),
+        sender: 'ai',
+        text: "I am unable to process requests at this time. Please ensure the API key is configured in the environment (.env) as VITE_GEMINI_API_KEY.",
+      };
+      setMessages((prev) => [...prev, aiMsg]);
+    } finally {
       setIsTyping(false);
-    }, 1200);
+    }
   };
 
   return (
