@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Sparkles, MessageSquareQuote, Check } from 'lucide-react';
 
 import Navbar from './components/Navbar';
@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import LiveNotificationPill from './components/LiveNotificationPill';
 import SubscriptionModal from './components/SubscriptionModal';
 import ProjectsGallery from './components/ProjectsGallery';
+import DotAIChatbot from './components/DotAIChatbot';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -23,12 +24,33 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Global mouse tracking states for the interactive glowing orb following the cursor on the full website
-  const [globalMouse, setGlobalMouse] = useState({ x: 0, y: 0 });
+  const mouseX = useMotionValue(-1000);
+  const mouseY = useMotionValue(-1000);
+
+  const slowX = useSpring(mouseX, { damping: 30, stiffness: 120, mass: 0.5 });
+  const slowY = useSpring(mouseY, { damping: 30, stiffness: 120, mass: 0.5 });
+
+  const fastX = useSpring(mouseX, { damping: 20, stiffness: 220, mass: 0.3 });
+  const fastY = useSpring(mouseY, { damping: 20, stiffness: 220, mass: 0.3 });
+
+  const instantX = useSpring(mouseX, { damping: 15, stiffness: 350, mass: 0.15 });
+  const instantY = useSpring(mouseY, { damping: 15, stiffness: 350, mass: 0.15 });
+
+  const slowOffsetX = useTransform(slowX, (v) => v - 140);
+  const slowOffsetY = useTransform(slowY, (v) => v - 140);
+  
+  const fastOffsetX = useTransform(fastX, (v) => v - 24);
+  const fastOffsetY = useTransform(fastY, (v) => v - 24);
+
+  const instantOffsetX = useTransform(instantX, (v) => v - 7);
+  const instantOffsetY = useTransform(instantY, (v) => v - 7);
+
   const [isMouseActive, setIsMouseActive] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setGlobalMouse({ x: e.clientX, y: e.clientY });
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
       setIsMouseActive(true);
     };
 
@@ -43,7 +65,7 @@ export default function App() {
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, []);
+  }, [mouseX, mouseY]);
 
   // Cinematic page loader
   useEffect(() => {
@@ -195,50 +217,35 @@ export default function App() {
                 {/* Primary soft gold light pool (Smooth delay spring) */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.6 }}
-                  animate={{ 
-                    opacity: 1, 
-                    scale: 1,
-                    x: globalMouse.x - 140, 
-                    y: globalMouse.y - 140
-                  }}
+                  animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.6 }}
-                  transition={{ type: 'spring', damping: 30, stiffness: 120, mass: 0.5 }}
                   className="absolute left-0 top-0 pointer-events-none rounded-full bg-gradient-to-r from-gold-base/15 to-gold-light/10 blur-[85px] w-70 h-70 mix-blend-screen"
-                  style={{ willChange: 'transform' }}
+                  style={{ x: slowOffsetX, y: slowOffsetY, willChange: 'transform' }}
                 />
                 {/* Direct center core ember spotlight (Faster reactive spring) */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ 
-                    opacity: 0.75, 
-                    scale: 1,
-                    x: globalMouse.x - 24, 
-                    y: globalMouse.y - 24
-                  }}
+                  animate={{ opacity: 0.75, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.5 }}
-                  transition={{ type: 'spring', damping: 20, stiffness: 220, mass: 0.3 }}
                   className="absolute left-0 top-0 pointer-events-none rounded-full bg-gradient-to-r from-gold-light/35 to-white/20 blur-xl w-12 h-12"
-                  style={{ willChange: 'transform' }}
+                  style={{ x: fastOffsetX, y: fastOffsetY, willChange: 'transform' }}
                 />
                 {/* Geometric high-tech tracking alignment ring */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.4 }}
-                  animate={{ 
-                    opacity: 0.5, 
-                    scale: 1,
-                    x: globalMouse.x - 7, 
-                    y: globalMouse.y - 7
-                  }}
+                  animate={{ opacity: 0.5, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.4 }}
-                  transition={{ type: 'spring', damping: 15, stiffness: 350, mass: 0.15 }}
                   className="absolute left-0 top-0 pointer-events-none rounded-full border border-gold-light/60 w-3.5 h-3.5 flex items-center justify-center bg-black/5"
-                  style={{ willChange: 'transform' }}
+                  style={{ x: instantOffsetX, y: instantOffsetY, willChange: 'transform' }}
                 >
                   <span className="w-1 h-1 rounded-full bg-gold-light" />
                 </motion.div>
               </div>
             )}
           </AnimatePresence>
+
+          {/* AI Chatbot Assistant */}
+          <DotAIChatbot />
 
         </div>
       )}
